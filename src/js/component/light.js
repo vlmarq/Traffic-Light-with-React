@@ -1,30 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 export function Light(props) {
-	const [isGlow, setIsGlow] = useState(false);
-
-	const controlGlow = () => {
-		if (isGlow) {
-			setIsGlow(false);
-		} else {
-			setIsGlow(true);
-		}
-	};
-
 	return (
 		<button
-			className={
-				isGlow ? "light rounded-circle glow" : "light rounded-circle"
-			}
-			style={{ backgroundColor: props.color }}
-			onClick={() => controlGlow()}
+			className={"light rounded-circle"}
+			style={{
+				backgroundColor:
+					props.color === props.glow ? props.color : "grey"
+			}}
+			onClick={() => props.setGlow(props.color)}
 		/>
 	);
 }
 
 Light.propTypes = {
-	color: PropTypes.string
+	color: PropTypes.string,
+	glow: PropTypes.string,
+	setGlow: PropTypes.func
 };
 
 export default Light;
